@@ -1,0 +1,40 @@
+Zadanie 1
+
+Zapytanie:
+SELECT SalesOrderID, SalesOrderDetailID
+FROM Sales.SalesOrderDetail
+WHERE SalesOrderID = 43683
+ AND SalesOrderDetailID = 240
+
+A)
+
+Przypadek 1. gdy istnieje klucz główny
+Dzięki wykorzystaniu indeksu, operacja jest wykonywana widocznie szybciej, oraz przy niższym wykorzystaniu zasobów. 
+Koszty operacji I/O wynoszą ~0,0033,
+Koszty CPU wynoszą 0,00018,
+Ilość wierszy, która musiała być wczytana wynosi 1
+
+Przypadek 2. po usunięciu klucza głównego (tabela staje się wtedy stertą)
+Operacja jest wykonywana znacznie dłużej, ponieważ wymagała ona przeszukania całej tabeli, co zwiększyło także ilość
+wykorzystanych zasobów.
+Koszty operacji I/O wynoszą ~0,92,
+Koszty CPU wynoszą 0,135
+Ilość wierszy, która musiała być wczytana wynosi 121317 ( cała tabela )
+
+B)
+
+Zamiana słowa kluczowego na OR sprawiła że wypisana została większa ilość rekordów - 7, wynika to z tego, iż
+wystarczyło spełnienie jednego z warunków zamiast obydwu. Koszty operacji naturalnie również wzrastają,
+ponieważ system musi przetworzyć większa ilośc rekordów w tabeli.
+
+
+Zadanie 2
+
+Zapytanie:
+
+SELECT PersonID,TerritoryID
+FROM Sales.Customer
+WHERE TerritoryID = 5;
+
+Po stworzeniu indeksu, operacja została wykonana szybciej, przy wykorzystaniu mniejszej ilości zasobów. To,
+oraz wyniki poprzedniego zadania potwierdzają, że indeksy przyspieszają i uwydajniają działanie bazy danych.
